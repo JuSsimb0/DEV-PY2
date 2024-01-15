@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class Book:
     def __init__(self, ident: int, name: str, pages: int):
         self.ident = ident
@@ -12,15 +15,15 @@ class Book:
 
 
 class Library:
-    def __init__(self, books=None):
-        self.books = books or []
+    def __init__(self, books: Optional[list[Book]] = None):
+        self.books: list[Book] = books or []
 
-    def get_next_book_id(self):
+    def get_next_book_id(self) -> int:
         if not self.books:
             return 1
         return self.books[-1].ident + 1
 
-    def get_index_by_book_id(self, book_id):
+    def get_index_by_book_id(self, book_id: int) -> int:
         for index, book in enumerate(self.books):
             if book.ident == book_id:
                 return index
